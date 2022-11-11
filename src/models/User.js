@@ -37,6 +37,7 @@ userSchema.pre('save', function (next) {
 
       //update user password
       user.password = hash;
+      next();
     });
   });
 });
@@ -52,7 +53,7 @@ userSchema.methods.comparePassword = function (candidatePassword) {
       }
 
       if (!isMatch) {
-        return reject(false);
+        return reject(false); //passwords do not match up
       }
 
       //if pass both if tests,

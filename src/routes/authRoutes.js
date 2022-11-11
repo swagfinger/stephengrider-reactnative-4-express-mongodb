@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
 router.post('/signin', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(402).send({ error: 'must provide email and password' });
+    return res.status(422).send({ error: 'must provide email and password' });
   }
 
   const user = await User.findOne({ email });
@@ -39,7 +39,7 @@ router.post('/signin', async (req, res) => {
   }
 
   try {
-    await user.comparePassword(password);
+    await user.comparePassword(password); //if successfully compared passwords
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY');
     res.send({ token });
   } catch (err) {
