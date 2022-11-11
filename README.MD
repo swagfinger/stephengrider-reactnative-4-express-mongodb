@@ -18,3 +18,7 @@ browser: localhost:3000
 ## postman
 
 use postman to test routes
+
+## JSON web token
+
+jwt.io

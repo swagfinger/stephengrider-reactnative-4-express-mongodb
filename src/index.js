@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser'); //handle json
 const authRoutes = require('./routes/authRoutes');
+const requireAuth = require('./middlewares/requireAuth'); //middleware
 
 const app = express();
 app.use(bodyParser.json()); //gives access to req.body
@@ -21,8 +22,10 @@ mongoose.connection.on('error', (err) => {
 });
 
 //router route
-app.get('/', (req, res) => {
-  res.send('hello world!');
+//get has middleware 'requireAuth'
+//accessible only if jwt valid token available
+app.get('/', requireAuth, (req, res) => {
+  res.send(`your email is ${req.user.email}`);
 });
 
 //start server
