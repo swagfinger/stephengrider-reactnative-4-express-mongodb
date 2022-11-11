@@ -14,3 +14,7 @@ browser: localhost:3000
 - setup database user/password
 - allow ip address
 - connection method: node.js - 2.2.12 or later
+
+## postman
+
+use postman to test routes
